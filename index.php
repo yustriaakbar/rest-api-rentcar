@@ -4,15 +4,12 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div style="width:700px; margin:0 auto;">
-
-<h3>Rest API Persewaan Mobil</h3>   
-<form action="" method="POST">
-<label>Enter Order ID:</label><br />
-<input type="text" name="order_id" placeholder="Enter Order ID" required/>
-<br /><br />
-<button type="submit" name="submit">Submit</button>
-</form>    
+<h3 class="text-center mt-2">Rest API Persewaan Mobil</h3>
+<div class="container mt-5">   
+  <form class="form-inline" action="" method="POST">
+    <input class="form-control mr-sm-2" type="text" name="order_id" placeholder="Enter Order ID" required aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit">Search</button>
+  </form>
 
 <?php
 if (isset($_POST['order_id']) && $_POST['order_id']!="") {
@@ -24,18 +21,42 @@ if (isset($_POST['order_id']) && $_POST['order_id']!="") {
 	$response = curl_exec($client);
 	
 	$result = json_decode($response);
-	
-	echo "<table>";
-	echo "<tr><td>Order ID:</td><td>$result->order_id</td></tr>";
-	echo "<tr><td>Pemesan:</td><td>$result->nama_pemesan</td></tr>";
-	echo "<tr><td>Mobil:</td><td>$result->mobil</td></tr>";
-	echo "<tr><td>Tanggal Pesan:</td><td>$result->tgl_pesan</td></tr>";
-	echo "<tr><td>Tanggal Pinjam:</td><td>$result->tgl_pinjam</td></tr>";
-	echo "<tr><td>Tanggal Kembali:</td><td>$result->tgl_kembali</td></tr>";
-	echo "<tr><td>Lama Rental:</td><td>$result->lama_rental</td></tr>";
-	echo "<tr><td>Total Bayar:</td><td>$result->total_bayar</td></tr>";
-	echo "<tr><td>Status Transaksi:</td><td>$result->status_transaksi</td></tr>";
-	echo "</table>";
+	if (empty($result->order_id)) {
+	  echo "No Record Found";
+	}else{
+/*
+	echo "<table class='table table-bordered table-hover'>
+		  <thead class='bg-light'>
+		    <tr>
+		      <th scope='col'></th>
+		      <th scope='col'>Order ID</th>
+		      <th scope='col'>Pemesan</th>
+		      <th scope='col'>Mobil</th>
+		      <th scope='col'>Tanggal Pesan</th>
+		      <th scope='col'>Tanggal Pinjam</th>
+		      <th scope='col'>Tanggal Kembali</th>
+		      <th scope='col'>Lama Rental</th>
+		      <th scope='col'>Total Bayar</th>
+		      <th scope='col'>Status Transaksi</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <th scope='row'>1</th>
+		      <td>$result->order_id</td>
+		      <td>$result->nama_pemesan</td>
+		      <td>$result->mobil</td>
+		      <td>$result->tgl_pesan</td>
+		      <td>$result->tgl_pinjam</td>
+		      <td>$result->tgl_kembali</td>
+		      <td>$result->lama_rental</td>
+		      <td>$result->total_bayar</td>
+		      <td>$result->status_transaksi</td>
+		    </tr>
+		</table>";
+*/
+	print_r($response);
+	}
 }
     ?>
 </div>

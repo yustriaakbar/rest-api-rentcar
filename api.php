@@ -17,7 +17,7 @@ if (isset($_GET['order_id']) && $_GET['order_id']!="") {
 	response($order_id, $nama_pemesan, $mobil, $tgl_pesan, $tgl_pinjam, $tgl_kembali, $lama_rental, $total_bayar, $status_transaksi);
 	mysqli_close($con);
 	}else{
-		response("No Record Found", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+		response(NULL, "No Record Found");
 		}
 }else{
 	response(NULL, NULL, 400,"Invalid Request");
